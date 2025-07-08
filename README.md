@@ -1,4 +1,4 @@
-# Speedoku_DLX 🔢
+# SpeedokuDLX 🔢
 An ultra-efficient Sudoku solver built entirely in Python using **Donald Knuth’s Algorithm X** and the **Dancing Links (DLX)** technique.  
 This project models Sudoku as an **Exact Cover** problem and solves it with blazing speed and elegant recursion.
 
