@@ -1,25 +1,22 @@
-# SudokuX 🧠🔥  
-A blazing-fast Sudoku solver powered by Donald Knuth’s **Algorithm X** and **Dancing Links (DLX)** — built entirely in Python.
+# SudokuX ♟️ 
+An ultra-efficient Sudoku solver built entirely in Python using **Donald Knuth’s Algorithm X** and the **Dancing Links (DLX)** technique.  
+This project models Sudoku as an **Exact Cover** problem and solves it with blazing speed and elegant recursion.
 
 ---
 
-## 🚀 Features
+##  Features
 
-- Models Sudoku as a 729×324 **Exact Cover problem**
-- Implements **DLX (Dancing Links)** for ultra-efficient constraint resolution
-- Solves any valid 9×9 puzzle in milliseconds
-- Tracks total number of valid solutions (uniqueness detection)
-- Clean, recursive architecture — easy to understand and extend
-- Optional **Pygame GUI** for real-time visualization
-
----
-
-## 📷 Screenshot  
-<img src="screenshot.png" alt="sudoku gui" width="500"/>
+- Translates Sudoku into a **729×324 binary constraint matrix**
+- Implements **DLX** (Dancing Links) for constant-time cover/uncover operations
+- Solves any standard 9×9 puzzle in real time
+- Supports full **solution enumeration** and uniqueness detection
+- Built with a **modular, recursive architecture** — perfect for learning or extension
+- Includes an optional **Pygame GUI** to visualize solutions instantly
 
 ---
 
-## 🧩 Example Puzzle
+##  Example Puzzle
+
 ```python
 puzzle = [
     [3, 0, 0, 8, 0, 0, 1, 0, 0],
@@ -32,9 +29,45 @@ puzzle = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 4, 0, 0, 9, 7, 0, 0],
 ]
+```
 
-How to Run
+---
+
+## 🛠️ How to Run
+
+### 1. Clone the Repository
+
+```bash
 git clone https://github.com/yourusername/sudokux.git
 cd sudokux
+```
+
+### 2. Install Requirements
+
+```bash
 pip install pygame
+```
+
+### 3. Run the Solver
+
+```bash
 python SSX.py
+```
+
+ If you want to run without the GUI, just comment out the `gui.run()` line at the bottom of the script.
+
+---
+
+## Tech Stack
+
+- Python 3
+- Algorithm X
+- Dancing Links (DLX)
+- Exact Cover theory
+- Pygame *(optional, for GUI)*
+
+---
+
+##  License
+
+MIT License. Feel free to use, modify, or contribute.
