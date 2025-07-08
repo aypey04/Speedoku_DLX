@@ -1,25 +1,21 @@
 import time # IMPORT: For timing the solver
 
-# Node class for the doubly-linked list structure
 class Node:
     def __init__(self):
         self.left = self.right = self.up = self.down = self
         self.column = None
         self.row_id = None
 
-# Column node inherits from Node, adding size and a name
 class ColumnNode(Node):
     def __init__(self, name=""):
         super().__init__()
         self.size = 0
         self.name = name
 
-# DLX Solver class
 class DLXSolver:
     def __init__(self):
         self.root = ColumnNode('root')
         self.solution = []
-        # ADDED: Attributes for counting and storing the first solution
         self.solution_count = 0
         self.first_solution = None
 
@@ -29,7 +25,6 @@ class DLXSolver:
             yield curr
             curr = curr.right
 
-    # ADDED: New helper to iterate left for proper backtracking
     def _iterate_left(self, start_node):
         """Iterates left from a node until it returns to the start."""
         curr = start_node.left
@@ -103,12 +98,11 @@ class DLXSolver:
         col_header.right.left = col_header
         col_header.left.right = col_header
 
-    # MODIFIED: This method now finds all solutions instead of just the first.
     def search(self):
         """Recursively search for all exact cover solutions."""
         if self.root.right == self.root:
             self.solution_count += 1
-            if self.first_solution is None: # Save the first solution we find
+            if self.first_solution is None:
                 self.first_solution = list(self.solution)
             return
 
@@ -133,7 +127,6 @@ class DLXSolver:
         
         self.uncover(col_to_cover)
 
-    # MODIFIED: `solve` now calls the new search and uses the results.
     def solve(self, puzzle):
         if not puzzle or len(puzzle) != 9 or any(len(row) != 9 for row in puzzle):
             raise ValueError("Invalid puzzle: must be a 9x9 grid")
@@ -141,18 +134,17 @@ class DLXSolver:
         matrix, row_ids = sudoku_to_exact_cover(puzzle)
         self.build_matrix(matrix, row_ids)
 
-        self.search() # This will find all solutions and populate the count/first_solution
+        self.search() 
 
         if self.solution_count > 0:
             result = [[0] * 9 for _ in range(9)]
-            for node in self.first_solution: # Use the saved first solution
+            for node in self.first_solution: 
                 r, c, d = node.row_id
                 result[r][c] = d
             return result
         else:
             return None
 
-# This function remains the same
 def sudoku_to_exact_cover(grid):
     matrix = []
     row_ids = []
@@ -178,7 +170,6 @@ def sudoku_to_exact_cover(grid):
                 
     return matrix, row_ids
 
-# MODIFIED: Main execution block now includes timing and solution count printing
 if __name__ == "__main__":
     puzzle = [
         [3, 0, 0, 8, 0, 0, 1, 0, 0],
@@ -206,8 +197,6 @@ if __name__ == "__main__":
             for row in solution:
                 print(row)
             print("-" * 25)
-            # Print the total count and time
-            print(f"Total solutions found: {solver.solution_count}")
             print(f"Time taken: {duration:.4f} seconds")
         else:
             print("No solution exists for the given puzzle.")
